@@ -1,0 +1,21 @@
+.account-card {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 16px;
+    margin-bottom: 12px;
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.5);
+}
+
+.account-card h3 {
+    margin-top: 0;
+    color: #333;
+}
+
+.account-card p {
+    margin-bottom: 4px;
+}
+
+.account-card small {
+    color: #777;
+}

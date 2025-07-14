@@ -9,7 +9,7 @@ import { environment } from '../../../environments/environment';
 })
 export class AccountService {
   private http = inject(HttpClient);
-  private apiUrl = `${environment}/accounts`;
+  private apiUrl = `${environment.apiUrl}/accounts`;
   constructor() {}
 
   getAccounts(): Observable<Account[]> {
