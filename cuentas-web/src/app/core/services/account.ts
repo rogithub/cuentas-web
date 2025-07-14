@@ -9,11 +9,14 @@ import { environment } from '../../../environments/environment';
 })
 export class AccountService {
   private http = inject(HttpClient);
-  private apiUrl = `${environment.apiUrl}/accounts`;
+  private apiUrl: string = `${environment.apiUrl}/accounts`;
   constructor() {}
 
   getAccounts(): Observable<Account[]> {
     return this.http.get<Account[]>(this.apiUrl);
   }
-  
+
+  createAccount(account: Account): Observable<Account> {
+    return this.http.post<Account>(this.apiUrl, account);
+  }
 }

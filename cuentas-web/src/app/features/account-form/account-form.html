@@ -1,0 +1,14 @@
+<h2>Nueva cuenta</h2>
+<form [formGroup]="accountForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+        <label for="name">Nombre de la cuenta</label>
+        <input name="name" type="text" formControlName="name">
+    </div>
+
+    <div class="form-group">
+        <label for="balance">Saldo inicial</label>
+        <input name="balance" type="number" formControlName="balance">
+    </div>
+
+    <button type="submit" [disabled]="!accountForm.valid">Crear Cuenta</button>
+</form>
