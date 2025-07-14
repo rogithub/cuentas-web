@@ -19,4 +19,9 @@ export class AccountService {
   createAccount(account: Account): Observable<Account> {
     return this.http.post<Account>(this.apiUrl, account);
   }
+
+  getAccountById(id: number): Observable<Account> {
+    const url = `${this.apiUrl}/${id}`;
+    return this.http.get<Account>(url);
+  }
 }

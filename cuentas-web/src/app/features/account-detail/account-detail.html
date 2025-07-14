@@ -1,0 +1,11 @@
+@if (account(); as acc) { 
+<h2>Detalles de la cuenta: {{ acc.name }}</h2>
+<div class="detail-card">
+    <p><strong>Id:</strong>{{ acc.id }}</p>
+    <p><strong>Nombre:</strong>{{ acc.name }}</p>
+    <p><strong>Saldo:</strong>{{ acc.balance }}</p>
+    <p><strong>Creado el:</strong>{{ acc.createdAt | date: 'fullDate' }}</p>
+</div>
+} @else {
+    <p>Cargando detalles de la cuenta... </p>
+}
