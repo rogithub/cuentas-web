@@ -5,6 +5,11 @@
     <p><strong>Nombre:</strong>{{ acc.name }}</p>
     <p><strong>Saldo:</strong>{{ acc.balance }}</p>
     <p><strong>Creado el:</strong>{{ acc.createdAt | date: 'fullDate' }}</p>
+
+    <div class="actions">
+        <button (click)="editAccount(acc.id)">Editar</button>
+        <button (click)="deleteAccount(acc.id)">Eliminar</button>
+    </div>
 </div>
 } @else {
     <p>Cargando detalles de la cuenta... </p>

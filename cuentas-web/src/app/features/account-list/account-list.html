@@ -9,7 +9,11 @@
     <small>
         Creada: {{ account.createdAt | date:'short' }}
     </small>
+
+    <a [routerLink]="['/accounts', account.id]">Ver Detalles</a>
 </div>
 } @empty {
     <p> No ha creado cuentas aún. </p>
 }
+
+<a [routerLink]="['/accounts/new']">Crear Nueva Cuenta</a>
