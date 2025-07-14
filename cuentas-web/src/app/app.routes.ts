@@ -5,6 +5,7 @@ import { AccountDetail } from './features/account-detail/account-detail';
 
 export const routes: Routes = [
     { path: 'accounts/new', component: AccountForm },
+    { path: 'accounts/edit/:id', component: AccountForm },
     { path: 'accounts/:id', component: AccountDetail },
     { path: 'accounts', component: AccountList },
     { path: '', redirectTo: '/accounts', pathMatch: 'full'}

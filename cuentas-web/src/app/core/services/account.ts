@@ -20,6 +20,11 @@ export class AccountService {
     return this.http.post<Account>(this.apiUrl, account);
   }
 
+  updateAccount(account: Account): Observable<void> {
+    const url = `${this.apiUrl}/${account.id}`;
+    return this.http.put<void>(url, account);
+  }
+
   getAccountById(id: number): Observable<Account> {
     const url = `${this.apiUrl}/${id}`;
     return this.http.get<Account>(url);

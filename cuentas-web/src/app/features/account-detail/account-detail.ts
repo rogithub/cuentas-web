@@ -35,7 +35,7 @@ export class AccountDetail implements OnInit {
   }
 
   editAccount(id: number): void {
-    console.log(`Editando ${id}`);
+    this.router.navigate(['/accounts/edit', id]);
   }
 
   deleteAccount(id: number): void {
