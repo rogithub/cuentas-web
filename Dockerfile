@@ -6,13 +6,15 @@ FROM node:20 AS build
 # Establecemos el directorio de trabajo dentro del contenedor.
 WORKDIR /usr/src/app
 
-# Copiamos el package.json y package-lock.json para instalar las dependencias.
+# Copiamos el package.json y package-lock.json desde la subcarpeta correcta.
 # Hacemos esto primero para aprovechar el cache de Docker.
-COPY package*.json ./
-RUN npm install --max-old-space-size=4096
+COPY cuentas-web/package*.json ./
 
-# Copiamos todo el resto del código fuente de la aplicación.
-COPY . .
+# Usamos npm ci para una instalación limpia y rápida, ideal para CI/CD.
+RUN npm ci
+
+# Copiamos todo el resto del código fuente de la aplicación desde la subcarpeta.
+COPY cuentas-web/. .
 
 # Ejecutamos el comando de build de Angular para producción.
 # Esto generará los archivos estáticos optimizados en la carpeta /dist/cuentas-web/browser.
