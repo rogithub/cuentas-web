@@ -9,7 +9,7 @@ WORKDIR /usr/src/app
 # Copiamos el package.json y package-lock.json para instalar las dependencias.
 # Hacemos esto primero para aprovechar el cache de Docker.
 COPY package*.json ./
-RUN npm install
+RUN npm install --max-old-space-size=4096
 
 # Copiamos todo el resto del código fuente de la aplicación.
 COPY . .
