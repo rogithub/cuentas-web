@@ -11,6 +11,24 @@
         <button (click)="deleteAccount(acc.id)">Eliminar</button>
     </div>
 </div>
+
+<h3>Transacciones Recientes</h3>
+<div class="transactions-list">
+    @for(txn of transactions(); track txn.id) {
+        <div class="transaction-item" [class.income]="txn.type === 0" [class.expense]="txn.type === 1">
+            <p>
+                {{ txn.description }}
+            </p>
+            <p>
+                {{ txn.amount | currency:'MXN' }}
+            </p>
+            <small> {{ txn.transactionDate | date:'short' }} </small>
+        </div>
+    } @empty {
+        <p>No hay transacciones para mostrar en esta cuenta.</p>
+    }
+</div>
+
 } @else {
     <p>Cargando detalles de la cuenta... </p>
 }

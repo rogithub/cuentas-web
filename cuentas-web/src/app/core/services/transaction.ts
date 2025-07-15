@@ -10,9 +10,10 @@ import { environment } from '../../../environments/environment';
 export class TransactionService {
   private http = inject(HttpClient);
   private apiUrl: string = `${environment.apiUrl}/transactions`;
+  private accountsApiUrl = `${environment.apiUrl}/accounts`;
 
   getTransactionsForAccount(accountId: number): Observable<Transaction[]> {    
-    const url = `${this.apiUrl}/${accountId}/transactions`;
+    const url = `${this.accountsApiUrl}/${accountId}/transactions`;
     return this.http.get<Transaction[]>(url);
   }
 

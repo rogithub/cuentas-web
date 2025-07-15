@@ -1,0 +1,17 @@
+.transaction-list {
+    margin-top: 20px;
+}
+
+.transaction-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px;
+    border-bottom: 1px solid #eee;
+}
+
+.transaction-item.income {
+    color: green;
+}
+.transaction-item.expense {
+    color: red;
+}
