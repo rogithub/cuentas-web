@@ -39,8 +39,8 @@ export class TransactionForm implements OnInit{
       const transactionIdParam = params.get("transactionId");
 
       if (accountIdParam) {
-        this.accountId.set(+accountIdParam)
-      } else {
+        this.accountId.set(+accountIdParam);        
+      } else  {        
         console.error(`No se proporcionó un id de cuenta o de transacción`);
         this.router.navigate([`/accounts`]);
         return;
@@ -52,19 +52,17 @@ export class TransactionForm implements OnInit{
         return;
       }
 
-      
       this.isEditMode.set(true);
       
       // get fixed value as a const
       const txnId = +transactionIdParam;
       this.transactionId.set(txnId);
-      this.accountId.set(+accountIdParam);
-      
-      
+        
       this.txnSvc.getTransactionById(txnId)
         .subscribe(
           txn => this.transactionForm.patchValue(txn)
         )
+      
     });    
   }
 
