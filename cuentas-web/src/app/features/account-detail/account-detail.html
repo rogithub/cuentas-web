@@ -20,13 +20,23 @@
 <div class="transactions-list">
     @for(txn of transactions(); track txn.id) {
         <div class="transaction-item" [class.income]="txn.type === 0" [class.expense]="txn.type === 1">
-            <p>
-                {{ txn.description }}
-            </p>
-            <p>
-                {{ txn.amount | currency:'MXN' }}
-            </p>
-            <small> {{ txn.transactionDate | date:'short' }} </small>
+            <div class="transaction-details">
+                <p>
+                    {{ txn.description }}
+                </p>
+                <small> {{ txn.transactionDate | date:'medium' }} </small>                
+            </div>
+
+            <div class="transaction-actions">
+                <span class="amount">
+                    {{ txn.amount | currency:'MXN' }}
+                </span>
+
+                <button class="btn-edit" (click)="editTransaction(txn.id)">Editar</button>
+                <button class="btn-delete" (click)="deleteTransaction(txn.id)">Eliminar</button>
+            </div>
+            
+            
         </div>
     } @empty {
         <p>No hay transacciones para mostrar en esta cuenta.</p>

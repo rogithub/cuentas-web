@@ -71,5 +71,19 @@ export class AccountDetail implements OnInit {
       })
   }
 
+  editTransaction(transactionId: number) : void {
+    const accountId = this.account()?.id;
+    if (!accountId) return;
+    this.router.navigate(['/accounts', accountId, 'transactions', 'edit', transactionId]);
+  }
 
+  deleteTransaction(transactionId: number) : void {
+    if (!confirm(`¿Estás seguro de que quieres eliminar la transacción ID ${transactionId}`)) return;
+
+    this.txnSvc.deleteTransaction(transactionId)
+      .subscribe({
+        next: () => this.loadTransactions(this.account()!.id), // reload/refresh list
+        error: () => console.error(`Error al eliminar la transacción ${transactionId}`)
+      });
+  }
 }
