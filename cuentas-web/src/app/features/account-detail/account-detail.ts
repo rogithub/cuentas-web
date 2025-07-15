@@ -3,7 +3,10 @@ import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { AccountService } from '../../core/services/account';
+import { TransactionService } from '../../core/services/transaction';
 import { Account } from '../../core/models/account.model';
+import { Transaction } from '../../core/models/transaction.model';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-account-detail',
@@ -16,13 +19,17 @@ export class AccountDetail implements OnInit {
   private route = inject(ActivatedRoute);
   private router = inject(Router);
   private actSvc = inject(AccountService);
+  private txnSvc = inject(TransactionService);
   public account = signal<Account | undefined>(undefined);
+  public transactions = signal<Transaction[]>([]);
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');    
     if (!id) return;
 
+    const accountId = +id; // el + lo convierte en numeric
+
     // el + convierte el id a numeric
-    this.actSvc.getAccountById(+id)
+    this.actSvc.getAccountById(accountId)
       .subscribe({
         next: (data) => {
           this.account.set(data);          
@@ -31,6 +38,16 @@ export class AccountDetail implements OnInit {
           console.error(`Error fetching account details: ${err.message}`);
           this.account.set(undefined);
         }
+      });
+
+      this.loadTransactions(accountId);
+  }
+
+  loadTransactions(accountId: number): void {
+    this.txnSvc.getTransactionsForAccount(accountId)
+      .subscribe({
+        next: (data) => this.transactions.set(data),
+        error: (err) => console.error(`Error fetching transactions: ${err.message}`)
       });
   }
 

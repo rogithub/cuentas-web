@@ -11,7 +11,7 @@ export class TransactionService {
   private http = inject(HttpClient);
   private apiUrl: string = `${environment.apiUrl}/transactions`;
 
-  getTransactions(accountId: number): Observable<Transaction[]> {    
+  getTransactionsForAccount(accountId: number): Observable<Transaction[]> {    
     const url = `${this.apiUrl}/${accountId}/transactions`;
     return this.http.get<Transaction[]>(url);
   }
