@@ -32,30 +32,40 @@ export class TransactionForm implements OnInit{
   transactionType = TransactionType;
 
   ngOnInit(): void {
-    const accountIdParam = this.route.snapshot.paramMap.get("accountId");
-    const transactionIdParam = this.route.snapshot.paramMap.get("transactionId");
 
-    if (!accountIdParam) {
-      console.error(`No se proporcionó un id de cuenta o de transacción`);
-      this.router.navigate([`/accounts`]);
-      return;
-    }
+    // usamos el observable paramMap para reaccionar a los cambios en la URL
+    this.route.paramMap.subscribe( params => { 
+      const accountIdParam = params.get("accountId");
+      const transactionIdParam = params.get("transactionId");
 
-    // this is valid for new txns
-    if (!transactionIdParam) return;
+      if (accountIdParam) {
+        this.accountId.set(+accountIdParam)
+      } else {
+        console.error(`No se proporcionó un id de cuenta o de transacción`);
+        this.router.navigate([`/accounts`]);
+        return;
+      }
 
-    // get fixed value as a const
-    const txnId = +transactionIdParam;
+      // this is valid for new txns
+      if (!transactionIdParam) {
+        this.isEditMode.set(false);
+        return;
+      }
 
-    this.accountId.set(+accountIdParam);
-    this.transactionId.set(txnId);
-    this.isEditMode.set(true);
-
-    
-    this.txnSvc.getTransactionById(txnId)
-      .subscribe(
-        txn => this.transactionForm.patchValue(txn)
-      )
+      
+      this.isEditMode.set(true);
+      
+      // get fixed value as a const
+      const txnId = +transactionIdParam;
+      this.transactionId.set(txnId);
+      this.accountId.set(+accountIdParam);
+      
+      
+      this.txnSvc.getTransactionById(txnId)
+        .subscribe(
+          txn => this.transactionForm.patchValue(txn)
+        )
+    });    
   }
 
 
