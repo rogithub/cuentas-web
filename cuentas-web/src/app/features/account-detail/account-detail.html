@@ -13,6 +13,10 @@
 </div>
 
 <h3>Transacciones Recientes</h3>
+<a [routerLink]="['/accounts', account()?.id, 'transactions', 'new']" class="btn-add">
+    + Nueva Transacción
+</a>
+
 <div class="transactions-list">
     @for(txn of transactions(); track txn.id) {
         <div class="transaction-item" [class.income]="txn.type === 0" [class.expense]="txn.type === 1">

@@ -1,0 +1,27 @@
+<h2>{{ isEditMode() ? 'Editar Transacción' : 'Nueva Transacción' }}</h2>
+
+<form [formGroup]="transactionForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+        <label for="description">Descripción</label>
+        <input type="text" id="description" formControlName="description">
+    </div>
+
+    <div class="form-group">
+        <label for="amount">Monto</label>
+        <input type="number" id="amount" formControlName="amount">
+    </div>
+
+    <div class="form-group">
+        <label>Tipo de transacción</label>
+        <div class="radio-group">
+            <input type="radio" id="expense" [value]="transactionType.Expense" formControlName="type">
+            <label for="expense">Gasto</label>
+            <input type="radio" id="income" [value]="transactionType.Income" formControlName="type">
+            <label for="income">Ingreso</label>
+        </div>
+    </div>
+
+    <button type="submit" [disabled]="!transactionForm.valid">
+        {{ isEditMode() ? 'Actualizar' : 'Crear' }}
+    </button>
+</form>
